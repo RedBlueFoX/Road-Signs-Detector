@@ -60,14 +60,14 @@ def saveForDataset(img, path = "Dataset/Source_Materials/Images/"):
 
 
 
-ap = argparse.ArgumentParser()
+# ap = argparse.ArgumentParser()
 
-ap.add_argument("-i", "--image", required = True, help = "Path to the input image")
-args = vars(ap.parse_args())
+# ap.add_argument("-i", "--image", required = False, help = "Path to the input image")
+# args = vars(ap.parse_args())
 
-img = cv2.imread(args["image"])
+# img = cv2.imread(args["image"])
 
-def detect_shapes(img):
+def detectShapes(img):
 
 	image = img.copy()
 
@@ -114,7 +114,3 @@ def detect_shapes(img):
 	return result
 
 					
-images = detect_shapes(img)
-for image in images:
-	cv2.imshow("Image" + str(image), image)
-cv2.waitKey(0)

@@ -4,7 +4,7 @@ import os
 import random
 
 
-OUTPUT_DIMENSIONS = (256, 256)
+OUTPUT_DIMENSIONS = (32, 32)
 IMAGE_CLASSES = [
     "Dataset/Source_Materials/Sorted/Airplanes",
 "Dataset/Source_Materials/Sorted/Ascending Hill",
@@ -138,8 +138,7 @@ def cropInput(img, info):
 	objSizeDenormalized = [float(objSize[0]) * IMAGE_DIMENSIONS[1], float(objSize[1]) * IMAGE_DIMENSIONS[0]]
 	print("Object size is: ", objSizeDenormalized)
 	objBox = [[objPosCoordinates[0] - objSizeDenormalized[0] / 2, objPosCoordinates[1] - objSizeDenormalized[1] / 2],
-			  [objPosCoordinates[0] + (float(objSizeDenormalized[0])), objPosCoordinates[1] + (float(objSizeDenormalized[1]))]]
-	print("Object info is: ",objBox)
+			  [objPosCoordinates[0] + float(objSizeDenormalized[0]), objPosCoordinates[1] + float(objSizeDenormalized[1])]]
 	
 	yCoord1 = int(objBox[0][1])
 	yCoord2 = int(objBox[1][1])
@@ -155,8 +154,9 @@ def cropInput(img, info):
 	else:
 		xCoord1 = 0
 	output = image[int(yCoord1):int(yCoord2), int(xCoord1):int(xCoord2)]
+	#output = cv2.cvtColor(output, cv2.COLOR_BGR2GRAY)
 	print("Final Image is: ", output.shape)
-	#output_final = cv2.cvtColor(output, cv2.COLOR_BGR2GRAY)
+	
 	return cv2.resize(output, OUTPUT_DIMENSIONS)
 
 def saveSorted(img, info, counter, dir = "Dataset/Source_Materials/Sorted/"):

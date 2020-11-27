@@ -4,7 +4,7 @@ import os
 import random
 
 
-OUTPUT_DIMENSIONS = (256, 256)
+OUTPUT_DIMENSIONS = (32, 32)
 IMAGE_CLASSES = [
     "Dataset/Source_Materials/Sorted/Airplanes",
 "Dataset/Source_Materials/Sorted/Ascending Hill",

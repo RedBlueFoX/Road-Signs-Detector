@@ -62,7 +62,7 @@ class rSigns:
 
 
 def debug():
-	dataset = rSigns(sorted = True)
+	dataset = rSigns()
 
 	xtrain, ytrain, xtest, ytest = dataset.load_data()
 
@@ -75,3 +75,4 @@ def debug():
 	print("Shape of test data is: ", xtest.shape)
 	print("Shape of test labels is: ", ytest.shape)
 
+#jdebug()

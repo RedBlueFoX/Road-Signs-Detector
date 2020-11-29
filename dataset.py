@@ -58,8 +58,7 @@ class rSigns:
 				output_labels.append(label_counter)
 			label_counter = label_counter + 1;	
 		
-		return np.array(output_images[0:15360]), np.array(output_labels[0:15360]), np.array(output_images[15360:]), np.array(output_labels[15360:]) # 80% of the initial dataset is train data, 20% is test data
-
+		return np.array(output_images), np.array(output_labels)
 
 def debug():
 	dataset = rSigns()

@@ -42,7 +42,7 @@ class rSigns:
 				for name in files:
 					image = cv2.imread(os.path.join(d, name))
 					class_dir.append(image)
-					print("Reading image: ", os.path.join(d, name))
+					#print("Reading image: ", os.path.join(d, name))
 			yield class_dir
 	def load_data(self):
 		output_images = []

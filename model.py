@@ -15,8 +15,11 @@ class ModelWrapper:
 	test_images = []
 	test_labels = []
 
-	def __init__(self, train_images, train_labels):
+	def __init__(self):
 		self.model = tf.keras.Sequential()
+		
+
+	def prepareData(self, train_images, train_labels):
 		self.train_images, self.train_labels = train_images, train_labels
 		mask = np.ones(len(self.train_images), dtype = bool)
 		for i in range(0, int(len(self.train_images) / 200)):
@@ -28,8 +31,6 @@ class ModelWrapper:
 				mask[temp] = False
 		self.train_images = self.train_images[mask, ...]
 		self.train_labels = self.train_labels[mask, ...]
-
-
 
 
 
@@ -75,7 +76,8 @@ class ModelWrapper:
 # 		tf.keras.callbacks.EarlyStopping(monitor = "loss", min_delta = 1e-2, patience = 5, verbose = 1),
 # 		tf.keras.callbacks.ModelCheckpoint(filepath = "./Model/Model{epoch}", save_best_only = True, monitor = "loss", verbose = 1)
 # 		]
-# model = ModelWrapper(train_images,train_labels)
+# model = ModelWrapper()
+# model.prepareData(train_images, train_labels)
 # model.addLayer(tf.keras.layers.Conv2D(32, 1,data_format ="channels_last" , padding = "same",input_shape = (32, 32, 3)))
 # model.addLayer(tf.keras.layers.Conv2D(32, 3, padding = "same"))
 # model.addLayer(tf.keras.layers.Conv2D(32, 1, padding = "same"))

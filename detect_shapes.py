@@ -53,10 +53,10 @@ def saveForDataset(img, path = "Dataset/Source_Materials/Images/"):
 	image = img.copy()
 	dim = (32, 32)
 
-	output = cv2.resize(image, dim, )
+	output = cv2.resize(image, dim)
 
 	#cv2.imshow("Output Image", output)
-	return image
+	return output
 
 
 
@@ -107,10 +107,14 @@ def detectShapes(img):
 				bBox = findBoundingBox(box,IMAGE_DIMENSIONS)
 				imageForDataset = image[bBox[0][1]:bBox[1][1], bBox[0][0]:bBox[1][0]].copy()
 				result.append(saveForDataset(imageForDataset))
+
 				#cv2.imshow("Cropped Image", imageForDataset)
 				#cv2.imshow("Image", image)
 				#cv2.waitKey(2000)
-	#cv2.waitKey(0)
-	return result
+	#cv2.waitKey(0)\
+
+	result = np.stack(result, axis = 0)
+	print(result.shape)
+	return result, image
 
 					

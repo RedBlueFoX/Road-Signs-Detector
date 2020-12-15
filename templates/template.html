@@ -15,7 +15,7 @@
     <div class="container">
       <p>My string: {{my_string}}</p>
       <p>Value from the list: {{my_list[3]}}</p>
-      <p>Loop through the list:</p>
+      <p>Loop through the list:</p> 
       <ul>
         {% for n in my_list %}
         <li>{{n}}</li>
@@ -27,6 +27,16 @@
       <img src= "{{filename}}" alt="Not found">
       <p> Processed image: </p>
       <img src="{{processed}}" alt="Failed to process">
+      <ul>
+        {% for i in parsedPreds %}
+
+        <li>
+          <p>{{loop.index}} prediction: {{labels[i["labelId"]]}} {{i["predictionValue"]}}</p>
+          <img src="{{url_for('static', filename = images[loop.index - 1])}}" alt="Not found">
+        </li>
+
+        {% endfor %}
+      </ul>
     </div>
     <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>

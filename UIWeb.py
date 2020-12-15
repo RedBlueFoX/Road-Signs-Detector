@@ -220,10 +220,17 @@ def uploaded_file(filename):
 	parsedPreds = parsePredictions(predictions, 0.8)
 	quickSort(parsedPreds, 0, len(parsedPreds) - 1)
 	print(parsedPreds)
+	imagesFileNames = []
 	for i, img in enumerate(parsedPreds):
-		cv2.imwrite("uploads/" + filename[:-4] + "pred" + i + ".png", images[i])
-		with open("uploads/" + filename[:-4] + "pred" + i + ".txt", "w") as file:
-			file1.writelines[img]
+		cv2.imwrite("uploads/" + filename[:-4] + "pred" + str(i) + ".png", images[img["arrayId"]])
+		imagesFileNames.append(filename[:-4] + "pred" + str(i) + ".png")
+		with open("uploads/" + filename[:-4] + "pred" + str(i) + ".txt", "w") as file:
+			file.write(str(img["arrayId"]))
+			file.write(" ")
+			file.write(str(img['labelId']))
+			file.write(" ")
+			file.write(str(img['predictionValue']))
+	print(imagesFileNames)
 	return render_template('template.html', my_string="Wheeeee!", my_list=[0,1,2,3,4,5],
 		filename = url_for('static', filename = filename), processed = url_for('static', filename = filename[:-4] + "processed.png"),
-		images = images, labels = labels, parsedPreds = parsedPreds)	
+		images = imagesFileNames, labels = labels, parsedPreds = parsedPreds)	

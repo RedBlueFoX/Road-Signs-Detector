@@ -12,7 +12,7 @@ class rSigns:
 	images = []
 	dirs = []
 	labels = []
-	def __init__(self, sorted, dataset_path = DATASET_PATH, labels_path = LABELS_PATH):
+	def __init__(self, dataset_path = DATASET_PATH, labels_path = LABELS_PATH):
 		self._getDirs()
 		self._getLabels()
 		self._getImages()
@@ -42,7 +42,7 @@ class rSigns:
 				for name in files:
 					image = cv2.imread(os.path.join(d, name))
 					class_dir.append(image)
-					print("Reading image: ", os.path.join(d, name))
+					#print("Reading image: ", os.path.join(d, name))
 			yield class_dir
 	def load_data(self):
 		output_images = []
@@ -58,18 +58,20 @@ class rSigns:
 				output_labels.append(label_counter)
 			label_counter = label_counter + 1;	
 		
-		return np.array(output_images[0:15360]), np.array(output_labels[0:15360]), np.array(output_images[15360:]), np.array(output_labels[15360:]) # 80% of the initial dataset is train data, 20% is test data
+		return np.array(output_images), np.array(output_labels)
 
+def debug():
+	dataset = rSigns()
 
-dataset = rSigns(sorted = True)
+	xtrain, ytrain, xtest, ytest = dataset.load_data()
 
-xtrain, ytrain, xtest, ytest = dataset.load_data()
+	print("Size of train data is: ", len(xtrain))
+	print("Size of train labels is: ", len(ytrain))
+	print("Shape of train data is: ", xtrain.shape)
+	print("Shape of train labels is: ", ytrain.shape)
+	print("Size of test data is: ", len(xtest))
+	print("Size of test labels is: ", len(ytest))
+	print("Shape of test data is: ", xtest.shape)
+	print("Shape of test labels is: ", ytest.shape)
 
-print("Size of train data is: ", len(xtrain))
-print("Size of train labels is: ", len(ytrain))
-print("Shape of train data is: ", xtrain.shape)
-print("Shape of train labels is: ", ytrain.shape)
-print("Size of test data is: ", len(xtest))
-print("Size of test labels is: ", len(ytest))
-print("Shape of test data is: ", xtest.shape)
-print("Shape of test labels is: ", ytest.shape)
+#jdebug()
